@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Inter';
+  }
+
+  h1, h2, h3, h4, h5 {
+    @apply font-bold;
+    @apply mb-4;
+  }
+
+  h1 {
+    @apply text-5xl;
+  }
+
+  p {
+
+  }
+
+  button {
+    @apply border px-4 py-2;
+  }
+}

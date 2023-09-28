@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Backwards timer</title>
+    <link
+      rel="icon"
+      href="https://em-content.zobj.net/source/twitter/376/three-oclock_1f552.png"
+    />
+
+    <!-- Our resources -->
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/index.js" defer></script>
+
+    <!-- Apline JS -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="flex justify-center p-6 py-5">
+    <main>
+      <h1>Hello</h1>
+      <p>Let's just start by making a basic timer.</p>
+
+      <div>
+        <p x-data x-text="$store.date.toLocaleString()">Hi</p>
+      </div>
+
+      <div>
+        <button x-data @click="alert('hello')">Hello</button>
+      </div>
+    </main>
+  </body>
+</html>
