@@ -4,10 +4,14 @@
 
 @layer base {
   body {
-    font-family: 'Inter';
+    font-family: "Inter";
   }
 
-  h1, h2, h3, h4, h5 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
     @apply font-bold;
     @apply mb-4;
   }
@@ -17,10 +21,11 @@
   }
 
   p {
-
+    @apply my-2;
   }
 
   button {
-    @apply border px-4 py-2;
+    @apply rounded border border-neutral-400 px-3 py-1;
+    @apply hover:bg-neutral-50;
   }
 }

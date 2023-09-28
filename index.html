@@ -29,13 +29,19 @@
   </head>
 
   <body class="flex justify-center p-6 py-5">
-    <main>
+    <main class="w-full max-w-2xl mt-12">
       <h1>Hello</h1>
       <p>Let's just start by making a basic timer.</p>
 
-      <div>
-        <p x-data x-text="$store.date.toLocaleString()">Hi</p>
-      </div>
+      <p>
+        <span>Current time:</span>
+        <span
+          class="font-bold tabular-nums"
+          x-data
+          x-ref="timer-text"
+          x-text="$store.date.toLocaleString()"
+        ></span>
+      </p>
 
       <div>
         <button x-data @click="alert('hello')">Hello</button>

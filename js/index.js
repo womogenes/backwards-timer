@@ -1,4 +1,6 @@
-console.log('Hello!');
+const main = () => {
+  console.log('Hello');
+};
 
 // Global stores!
 document.addEventListener('alpine:init', () => {
