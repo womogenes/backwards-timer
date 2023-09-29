@@ -6,14 +6,22 @@ const main = () => {
 document.addEventListener('alpine:init', () => {
   console.log('Alpine initialized.');
 
-  const defaultTime = 60;
+  const defaultTime = 5;
   Alpine.store('time', defaultTime);
   Alpine.store('timerInput', defaultTime);
+  Alpine.store('totalTime', defaultTime);
+  Alpine.store('proportion', 0);
 
   const timer = new Timer({
     tick: 0.01,
-    ontick: (ms) => Alpine.store('time', ms / 1000),
-    onend: () => Alpine.store('time', 0),
+    ontick: (ms) => {
+      Alpine.store('time', ms / 1000);
+      Alpine.store('proportion', 1 - ms / 1000 / Alpine.store('totalTime'));
+    },
+    onend: () => {
+      Alpine.store('time', 0);
+      Alpine.store('proportion', 1);
+    },
   });
   timer.start(defaultTime).pause();
 
@@ -22,7 +30,11 @@ document.addEventListener('alpine:init', () => {
     if (!amount) return;
     timer.start(amount).pause();
     Alpine.store('time', amount);
+    Alpine.store('totalTime', amount);
+    Alpine.store('proportion', 0);
   };
-  window.pauseTimer = () =>
+  window.pauseTimer = () => {
+    if (timer.getStatus() === 'stopped') return;
     timer.getStatus() === 'started' ? timer.pause() : timer.start();
+  };
 });

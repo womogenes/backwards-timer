@@ -35,7 +35,7 @@
   </head>
 
   <body class="flex justify-center p-6 py-5">
-    <main class="w-full max-w-2xl mt-12">
+    <main class="mt-12 w-full max-w-2xl">
       <h1>Backwards timer</h1>
 
       <div>
@@ -49,17 +49,41 @@
         />
       </div>
 
-      <p>
-        <span>Current time:</span>
-        <span
-          class="font-bold tabular-nums"
-          x-data
-          x-ref="timer-text"
-          x-text="$store.time.toFixed(2)"
-        ></span>
-      </p>
+      <div x-data>
+        <p>
+          <span>Total time:</span>
+          <span
+            class="font-bold tabular-nums"
+            x-text="$store.totalTime.toFixed(2)"
+          ></span>
+        </p>
+        <p>
+          <span>Remaining time:</span>
+          <span
+            class="font-bold tabular-nums"
+            x-text="$store.time.toFixed(2)"
+          ></span>
+        </p>
+        <p>
+          <span>Percentage complete:</span>
+          <span
+            class="font-bold tabular-nums"
+            x-text="`${($store.proportion * 100).toFixed(2)} %`"
+          ></span>
+        </p>
 
-      <div class="flex gap-2">
+        <!-- A little progress bar -->
+        <div
+          class="my-2 h-3 w-full max-w-sm overflow-clip rounded-full bg-neutral-200"
+        >
+          <div
+            class="relative my-2 h-full rounded-full bg-blue-500"
+            :style="{ transform: `translateX(-${100 - $store.proportion * 100}%)` }"
+          ></div>
+        </div>
+      </div>
+
+      <div class="mt-4 flex gap-2">
         <button x-data @click="setTimer">Set time</button>
         <button x-data @click="pauseTimer">Play / pause</button>
       </div>
