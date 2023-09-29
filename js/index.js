@@ -25,7 +25,14 @@ document.addEventListener('alpine:init', () => {
       Alpine.store('time', ms / 1000);
       const p = 1 - ms / 1000 / Alpine.store('totalTime');
       Alpine.store('proportion', p);
-      Alpine.store('date', convertTime(p).toISOString());
+      Alpine.store(
+        'date',
+        convertTime(p).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        }),
+      );
     },
     onend: () => {
       Alpine.store('time', 0);

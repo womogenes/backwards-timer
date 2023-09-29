@@ -44,7 +44,7 @@ html {
   -o-tab-size: 4;
      tab-size: 4;
   /* 3 */
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: Inter, ui-sans-serif, sans-serif;
   /* 4 */
   font-feature-settings: normal;
   /* 5 */
@@ -434,10 +434,6 @@ video {
   display: none;
 }
 
-body {
-  font-family: 'Inter';
-}
-
 h1,
   h2,
   h3,
@@ -636,10 +632,6 @@ input[type='number']::-webkit-inner-spin-button,
   margin-top: 3rem;
 }
 
-.mt-2 {
-  margin-top: 0.5rem;
-}
-
 .mt-4 {
   margin-top: 1rem;
 }
@@ -658,10 +650,6 @@ input[type='number']::-webkit-inner-spin-button,
 
 .h-full {
   height: 100%;
-}
-
-.w-96 {
-  width: 24rem;
 }
 
 .w-full {
@@ -684,10 +672,6 @@ input[type='number']::-webkit-inner-spin-button,
   justify-content: center;
 }
 
-.gap-4 {
-  gap: 1rem;
-}
-
 .gap-2 {
   gap: 0.5rem;
 }
@@ -700,14 +684,14 @@ input[type='number']::-webkit-inner-spin-button,
   border-radius: 9999px;
 }
 
-.bg-neutral-200 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(229 229 229 / var(--tw-bg-opacity));
-}
-
 .bg-blue-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(59 130 246 / var(--tw-bg-opacity));
+}
+
+.bg-neutral-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 229 229 / var(--tw-bg-opacity));
 }
 
 .p-6 {
@@ -730,10 +714,4 @@ input[type='number']::-webkit-inner-spin-button,
 .tabular-nums {
   --tw-numeric-spacing: tabular-nums;
   font-variant-numeric: var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction);
-}
-
-.transition-transform {
-  transition-property: transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
 }

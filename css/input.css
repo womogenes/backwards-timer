@@ -3,10 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    font-family: 'Inter';
-  }
-
   h1,
   h2,
   h3,
