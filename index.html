@@ -9,6 +9,12 @@
       href="https://em-content.zobj.net/source/twitter/376/three-oclock_1f552.png"
     />
 
+    <!-- Timer library -->
+    <script
+      src="https://cdn.jsdelivr.net/gh/husa/timer.js/dist/timer.min.js"
+      defer
+    ></script>
+
     <!-- Our resources -->
     <link rel="stylesheet" href="css/style.css" />
     <script src="js/index.js" defer></script>
@@ -23,15 +29,25 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
   </head>
 
   <body class="flex justify-center p-6 py-5">
     <main class="w-full max-w-2xl mt-12">
-      <h1>Hello</h1>
-      <p>Let's just start by making a basic timer.</p>
+      <h1>Backwards timer</h1>
+
+      <div>
+        <label class="block font-medium" for="timer-input">Time (s)</label>
+        <input
+          class="block"
+          id="timer-input"
+          type="number"
+          x-data
+          x-model="$store.timerInput"
+        />
+      </div>
 
       <p>
         <span>Current time:</span>
@@ -39,12 +55,13 @@
           class="font-bold tabular-nums"
           x-data
           x-ref="timer-text"
-          x-text="$store.date.toLocaleString()"
+          x-text="$store.time.toFixed(2)"
         ></span>
       </p>
 
-      <div>
-        <button x-data @click="alert('hello')">Hello</button>
+      <div class="flex gap-2">
+        <button x-data @click="setTimer">Set time</button>
+        <button x-data @click="pauseTimer">Play / pause</button>
       </div>
     </main>
   </body>
