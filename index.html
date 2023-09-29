@@ -32,6 +32,21 @@
       }
     </style>
 
+    <!-- KaTeX -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+      onload="renderMathInElement(document.body);"
+    ></script>
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -44,6 +59,10 @@
   <body class="flex justify-center p-6 py-5">
     <main class="mt-12 w-full max-w-2xl">
       <h1>Backwards timer</h1>
+
+      <p>This is based on <a href="https://xkcd.com/1017">xkcd 1017</a>. ime is determined by the formula
+          $$T = (\text{current date}) - (e^{20.3444p^3+3} - e^3)\text{ years}$$</span>
+      </p>
 
       <div>
         <label class="block font-medium" for="timer-input">Time (s)</label>

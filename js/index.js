@@ -19,6 +19,7 @@ document.addEventListener('alpine:init', () => {
       Alpine.store('time', ms / 1000);
       const p = 1 - ms / 1000 / Alpine.store('totalTime');
       Alpine.store('proportion', p);
+      Alpine.store('date', convertTime(p).toLocaleString());
     },
     onend: () => {
       Alpine.store('time', 0);
@@ -30,10 +31,12 @@ document.addEventListener('alpine:init', () => {
   window.setTimer = () => {
     const amount = parseFloat(Alpine.store('timerInput'));
     if (!amount) return;
+    timer.stop();
     timer.start(amount).pause();
     Alpine.store('time', amount);
     Alpine.store('totalTime', amount);
     Alpine.store('proportion', 0);
+    Alpine.store('date', '...');
   };
   window.pauseTimer = () => {
     if (timer.getStatus() === 'stopped') return;
