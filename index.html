@@ -60,8 +60,10 @@
     <main class="mt-12 w-full max-w-2xl">
       <h1>Backwards timer</h1>
 
-      <p>This is based on <a href="https://xkcd.com/1017">xkcd 1017</a>. ime is determined by the formula
-          $$T = (\text{current date}) - (e^{20.3444p^3+3} - e^3)\text{ years}$$</span>
+      <p>
+        This is based on <a href="https://xkcd.com/1017">xkcd 1017</a>. Time is
+        determined by the formula $$T = (\text{current date}) -
+        (e^{20.3444p^3+3} - e^3)\text{ years}.$$
       </p>
 
       <div>
@@ -71,7 +73,7 @@
           id="timer-input"
           type="number"
           x-data
-          x-model="$store.timerInput"
+          x-model.number="$store.timerInput"
         />
       </div>
 
@@ -80,26 +82,26 @@
           <span>Total time:</span>
           <span
             class="font-bold tabular-nums"
-            x-text="$store.totalTime.toFixed(2)"
+            x-text="$store.time.totalTime.toHHMMSS()"
           ></span>
         </p>
         <p>
           <span>Remaining time:</span>
           <span
             class="font-bold tabular-nums"
-            x-text="$store.time.toFixed(2)"
+            x-text="$store.time.time.toHHMMSS()"
           ></span>
         </p>
         <p>
           <span>Percentage complete:</span>
           <span
             class="font-bold tabular-nums"
-            x-text="`${($store.proportion * 100).toFixed(2)} %`"
+            x-text="`${($store.time.proportion * 100).toFixed(2)} %`"
           ></span>
         </p>
         <p>
           <span>Corresponding date:</span>
-          <span class="font-bold tabular-nums" x-text="$store.date"></span>
+          <span class="font-bold tabular-nums" x-text="$store.time.date"></span>
         </p>
 
         <!-- A little progress bar -->
@@ -108,7 +110,7 @@
         >
           <div
             class="relative my-2 h-full rounded-full bg-blue-500"
-            :style="{ transform: `translateX(-${100 - $store.proportion * 100}%)` }"
+            :style="{ transform: `translateX(-${100 - $store.time.proportion * 100}%)` }"
             x-cloak
           ></div>
         </div>
