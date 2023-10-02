@@ -6,7 +6,7 @@ const main = () => {
 document.addEventListener('alpine:init', () => {
   console.log('Alpine initialized.');
 
-  const defaultTime = 10;
+  const defaultTime = 60 * 10;
   Alpine.store('time', {
     time: defaultTime,
     totalTime: defaultTime,
@@ -14,7 +14,7 @@ document.addEventListener('alpine:init', () => {
       return 1 - this.time / this.totalTime;
     },
     get date() {
-      return convertTime(this.proportion);
+      return epochToStr(propToEpoch(this.proportion));
     },
   });
   const timeStore = Alpine.store('time');

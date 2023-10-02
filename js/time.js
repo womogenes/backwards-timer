@@ -14,13 +14,22 @@ Number.prototype.toHHMMSS = function () {
   return `${hours}:${minutes}:${seconds}`;
 };
 
-const convertTime = (p) => {
+const msInYear = 365.25 * 24 * 60 * 60 * 1000;
+
+const propToEpoch = (p) => {
   // p is a fraction between 0 and 1
   const yearsBack = Math.exp(20.3444 * Math.pow(p, 3) + 3) - Math.exp(3);
-  const epoch = new Date() - yearsBack * 365.25 * 24 * 60 * 60 * 1000;
+  const epoch = new Date() - yearsBack * msInYear;
+  return epoch;
+};
+
+const epochToStr = (epoch) => {
+  yearsBack = (new Date() - epoch) / msInYear;
 
   if (yearsBack >= 2e5) {
-    return `${yearsBack.toPrecision(3)} years ago`;
+    return `${yearsBack.toLocaleString('en-US', {
+      maximumFractionDigits: 0,
+    })} years ago`;
   }
 
   const date = new Date(epoch);
