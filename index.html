@@ -21,6 +21,11 @@
     <script src="js/time.js" defer></script>
 
     <!-- Apline JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"
+    ></script>
     <script
       defer
       src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
@@ -88,7 +93,7 @@
           <div>
             <template x-for="i in [...Array(11).keys()]">
               <div
-                class="absolute block h-full border border-dashed border-neutral-900"
+                class="absolute z-10 block h-full border border-dashed border-neutral-900"
                 :style="{left: `${i * 10}%`}"
               ></div>
             </template>
@@ -148,6 +153,9 @@
           is determined by the formula $$T = (\text{current date}) -
           (e^{20.3444p^3+3} - e^3)\text{ years}.$$
         </p>
+
+        <h2>Keyboard shortcuts</h2>
+        <p><kbd>➡️</kbd> &ndash; skip forward</p>
       </div>
     </main>
   </body>

@@ -26,7 +26,7 @@ const propToEpoch = (p) => {
 const epochToStr = (epoch) => {
   yearsBack = (new Date() - epoch) / msInYear;
 
-  if (yearsBack >= 2e5) {
+  if (yearsBack > 2023) {
     return `${yearsBack.toLocaleString('en-US', {
       maximumFractionDigits: 0,
     })} years ago`;

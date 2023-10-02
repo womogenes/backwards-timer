@@ -8,8 +8,8 @@ document.addEventListener('alpine:init', () => {
 
   const defaultTime = 60 * 10;
   Alpine.store('time', {
-    time: defaultTime,
-    totalTime: defaultTime,
+    time: Alpine.$persist(defaultTime).as('time'),
+    totalTime: Alpine.$persist(defaultTime).as('totalTime'),
     get proportion() {
       return 1 - this.time / this.totalTime;
     },
@@ -18,7 +18,38 @@ document.addEventListener('alpine:init', () => {
     },
   });
   const timeStore = Alpine.store('time');
-  Alpine.store('timerInput', defaultTime);
+  Alpine.store('timerInput', timeStore.totalTime);
+
+  // Keybinds to change the time
+  document.addEventListener('keydown', (e) => {
+    if (timeStore.time >= timeStore.totalTime && timeStore.time <= 0) return;
+
+    let factor;
+    if (e.key === 'ArrowRight') {
+      factor = 0.01;
+    } else if (e.key === 'ArrowLeft') {
+      factor = -0.01;
+    } else if (e.key === 'l') {
+      factor = 0.1;
+    } else if (e.key === 'j') {
+      factor = -0.1;
+    } else if (e.key === 'k') {
+      timer.getStatus() === 'paused' ? timer.start() : timer.pause();
+      return;
+    } else {
+      return;
+    }
+
+    let newTime = timeStore.time - timeStore.totalTime * factor;
+    timeStore.time = newTime;
+    if (timer.getStatus() === 'paused') {
+      timer.stop();
+      timer.start(newTime).pause();
+    } else {
+      timer.stop();
+      timer.start(newTime);
+    }
+  });
 
   const timer = new Timer({
     tick: 0.01,
@@ -29,7 +60,7 @@ document.addEventListener('alpine:init', () => {
       timeStore.time = 0;
     },
   });
-  timer.start(defaultTime).pause();
+  timer.start(timeStore.time).pause();
 
   window.setTimer = () => {
     const amount = Alpine.store('timerInput');
