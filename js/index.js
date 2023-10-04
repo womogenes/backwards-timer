@@ -30,6 +30,7 @@ document.addEventListener('alpine:init', () => {
     } else if (e.key === 'ArrowLeft') {
       factor = -0.01;
     } else if (e.key === 'l') {
+      if (timer.getStatus() === 'stopped') return;
       factor = 0.1;
     } else if (e.key === 'j') {
       factor = -0.1;
