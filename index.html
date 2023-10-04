@@ -80,8 +80,8 @@
                 x-text="`${i * 10}%`"
               ></span>
               <span
-                class="absolute top-4 -translate-x-1/2 text-center text-xs sm:text-base"
-                x-text="`${i * 10}%`"
+                class="absolute top-4 -translate-x-1/2 text-center text-xs sm:text-xs"
+                x-text="`${epochToStr(propToEpoch(i / 10))}`"
               ></span>
             </div>
           </template>
