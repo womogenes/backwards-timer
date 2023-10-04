@@ -2,6 +2,9 @@ const main = () => {
   console.log('Hello');
 };
 
+// Record when the page was opened.
+window.pageOpened = new Date();
+
 // Global stores!
 document.addEventListener('alpine:init', () => {
   console.log('Alpine initialized.');
@@ -25,12 +28,15 @@ document.addEventListener('alpine:init', () => {
     if (timeStore.time >= timeStore.totalTime && timeStore.time <= 0) return;
 
     let factor;
-    if (e.key === 'ArrowRight') {
+    if (e.key === '.') {
+      factor = 0.001;
+    } else if (e.key === ',') {
+      factor = -0.001;
+    } else if (e.key === 'ArrowRight') {
       factor = 0.01;
     } else if (e.key === 'ArrowLeft') {
       factor = -0.01;
     } else if (e.key === 'l') {
-      if (timer.getStatus() === 'stopped') return;
       factor = 0.1;
     } else if (e.key === 'j') {
       factor = -0.1;
@@ -41,7 +47,10 @@ document.addEventListener('alpine:init', () => {
       return;
     }
 
-    let newTime = timeStore.time - timeStore.totalTime * factor;
+    let newTime = Math.min(
+      timeStore.time - timeStore.totalTime * factor,
+      timeStore.totalTime,
+    );
     timeStore.time = newTime;
     if (timer.getStatus() === 'paused') {
       timer.stop();
@@ -53,7 +62,7 @@ document.addEventListener('alpine:init', () => {
   });
 
   const timer = new Timer({
-    tick: 0.01,
+    tick: 1 / 60,
     ontick: (ms) => {
       timeStore.time = ms / 1000;
     },

@@ -80,10 +80,10 @@ const epochToStrShort = (epoch) => {
   }
   if (yearsBack < 1e9) {
     // Format as "millions"
-    return `${toSigFigs(yearsBack / 1e6, 3)}M years&nbsp;ago`;
+    return `${toSigFigs(yearsBack / 1e6, 3)} M years&nbsp;ago`;
   }
   if (yearsBack < 1e12) {
     // Format as "billions"
-    return `${toSigFigs(yearsBack / 1e9, 3)}B years&nbsp;ago`;
+    return `${toSigFigs(yearsBack / 1e9, 3)} B years&nbsp;ago`;
   }
 };

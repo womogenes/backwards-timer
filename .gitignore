@@ -1,6 +1,8 @@
 node_modules/
 .vscode/
 
-data/
+data/historical_events/
+data/**.json
+data/**.zip
 
-.env
+**.env
