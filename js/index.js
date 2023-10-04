@@ -61,8 +61,17 @@ document.addEventListener('alpine:init', () => {
     }
   });
 
+  const toggleTimer = () => {
+    // Function to catch start time, if applicable
+  };
+
   const timer = new Timer({
     tick: 1 / 60,
+    onstart: function () {
+      if (this.getDuration() / 1000 === timeStore.totalTime) {
+        console.log('timer started');
+      }
+    },
     ontick: (ms) => {
       timeStore.time = ms / 1000;
     },
