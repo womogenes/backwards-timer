@@ -17,6 +17,7 @@
 
     <!-- Our resources -->
     <link rel="stylesheet" href="css/style.css" />
+    <script src="js/events.js" type="module" defer></script>
     <script src="js/index.js" defer></script>
     <script src="js/time.js" defer></script>
 
@@ -67,99 +68,113 @@
   <body class="flex items-center overflow-x-hidden p-6">
     <main class="flex w-full flex-col items-center">
       <!-- A little progress bar -->
-      <div class="flex w-full justify-center px-8 pb-12 pt-6">
-        <div class="relative w-full max-w-4xl" x-data>
-          <div>
-            <!-- Percentage labels -->
-            <template x-for="i in [...Array(11).keys()]">
-              <div
-                class="absolute sm:!block"
-                :style="{left: `${i * 10}%`, display: i % 2 ? 'none' : 'block'}"
-              >
-                <span
-                  class="absolute bottom-1 -translate-x-1/2 text-center text-xs sm:text-base"
-                  x-text="`${i * 10}%`"
-                ></span>
-                <span
-                  class="absolute top-4 -translate-x-1/2 text-center text-xs sm:text-xs"
-                  x-html="`${epochToStrShort(propToEpoch(i / 10))}`"
-                ></span>
-              </div>
-            </template>
-          </div>
-
-          <!-- Actual progress bar bit -->
-          <div class="h-3 w-full overflow-clip bg-neutral-200">
-            <!-- Grid lines -->
+      <div class="w-full max-w-5xl">
+        <div class="flex w-full justify-center px-6 pb-8 pt-6">
+          <div class="relative w-full" x-data>
             <div>
+              <!-- Percentage labels -->
               <template x-for="i in [...Array(11).keys()]">
                 <div
-                  class="absolute z-10 block h-full border border-dashed border-neutral-900"
-                  :style="{left: `${i * 10}%`}"
-                ></div>
+                  class="absolute sm:!block"
+                  :style="{left: `${i * 10}%`, display: i % 2 ? 'none' : 'block'}"
+                >
+                  <span
+                    class="absolute bottom-1 -translate-x-1/2 text-center text-xs sm:text-base"
+                    x-text="`${i * 10}%`"
+                  ></span>
+                  <span
+                    class="absolute top-4 -translate-x-1/2 text-center text-xs sm:text-xs"
+                    x-html="`${epochToStrShort(propToEpoch(i / 10))}`"
+                  ></span>
+                </div>
               </template>
             </div>
 
-            <div
-              class="relative h-full bg-blue-500"
-              :style="{ transform: `translateX(-${100 - $store.time.proportion * 100}%)` }"
-              x-cloak
-            ></div>
+            <!-- Actual progress bar bit -->
+            <div class="h-3 w-full overflow-clip bg-neutral-200">
+              <!-- Grid lines -->
+              <div>
+                <template x-for="i in [...Array(11).keys()]">
+                  <div
+                    class="absolute z-10 block h-full border border-dashed border-neutral-900"
+                    :style="{left: `${i * 10}%`}"
+                  ></div>
+                </template>
+              </div>
+
+              <div
+                class="relative h-full bg-blue-500"
+                :style="{ transform: `translateX(-${100 - $store.time.proportion * 100}%)` }"
+                x-cloak
+              ></div>
+            </div>
           </div>
         </div>
       </div>
 
+      <!-- Big date label -->
+      <div class="my-6 w-full max-w-2xl border p-6">
+        <p
+          x-data
+          class="text-4xl font-bold tabular-nums"
+          x-text="$store.time.date"
+        ></p>
+      </div>
+
       <!-- Content, controls -->
-      <div>
-        <div>
-          <label class="block font-medium" for="timer-input">Time (s)</label>
-          <input
-            class="block"
-            id="timer-input"
-            type="number"
+      <div class="flex w-full max-w-2xl items-start gap-6">
+        <div class="flex flex-col gap-2 border p-6" id="control-container">
+          <div>
+            <label class="block font-medium" for="timer-input">Time (s)</label>
+            <input
+              class="block"
+              id="timer-input"
+              type="number"
+              x-data
+              x-model.number="$store.timerInput"
+            />
+          </div>
+
+          <div x-data>
+            <p>
+              <span>Total time:</span>
+              <span
+                class="font-bold tabular-nums"
+                x-text="$store.time.totalTime.toHHMMSS()"
+              ></span>
+            </p>
+            <p>
+              <span>Remaining time:</span>
+              <span
+                class="font-bold tabular-nums"
+                x-text="$store.time.time.toHHMMSS()"
+              ></span>
+            </p>
+          </div>
+
+          <div class="flex gap-2">
+            <button x-data @click="setTimer">Set time</button>
+            <button x-data @click="pauseTimer">Play / pause</button>
+          </div>
+        </div>
+
+        <div class="w-full grow border p-6" id="log-container">
+          <h2>Logs</h2>
+          <div
+            class="flex max-h-96 flex-col gap-4 overflow-y-auto p-2"
+            id="logs"
             x-data
-            x-model.number="$store.timerInput"
-          />
-        </div>
-
-        <div x-data>
-          <p>
-            <span>Total time:</span>
-            <span
-              class="font-bold tabular-nums"
-              x-text="$store.time.totalTime.toHHMMSS()"
-            ></span>
-          </p>
-          <p>
-            <span>Remaining time:</span>
-            <span
-              class="font-bold tabular-nums"
-              x-text="$store.time.time.toHHMMSS()"
-            ></span>
-          </p>
-
-          <p>
-            <span>Corresponding date:</span>
-            <span
-              class="font-bold tabular-nums"
-              x-text="$store.time.date"
-            ></span>
-          </p>
-        </div>
-
-        <div class="mt-4 flex gap-2">
-          <button x-data @click="setTimer">Set time</button>
-          <button x-data @click="pauseTimer">Play / pause</button>
-        </div>
-
-        <div class="my-6 rounded border p-6">
-          <h1>About: Backwards timer</h1>
-
-          <p class="text-xs sm:text-base">
-            This is based on <a href="https://xkcd.com/1017">xkcd 1017</a>. Time
-            is determined by the formula $$T = (\text{current date}) -
-            (e^{20.3444p^3+3} - e^3)\text{ years}.$$
-          </p>
+          >
+            <template x-for="event in $store.eventList">
+              <div>
+                <span
+                  class="overflow-x-clip whitespace-nowrap font-bold tabular-nums"
+                  x-text="event.date"
+                ></span>
+                <span x-text="event.text"></span>
+              </div>
+            </template>
+          </div>
         </div>
       </div>
     </main>

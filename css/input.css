@@ -22,10 +22,6 @@
   h2 {
     @apply text-xl;
   }
-
-  p {
-    @apply my-2;
-  }
   a {
     @apply text-blue-600 hover:text-blue-400;
     @apply transition-colors;

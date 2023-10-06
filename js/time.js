@@ -21,6 +21,22 @@ Number.prototype.toHHMMSS = function () {
 
 const msInYear = 365.25 * 24 * 60 * 60 * 1000;
 
+const strToEpoch = (str) => {
+  // Convert a date like "2023-09-09" or "-44-03-15" to an epoch
+  let parts;
+  if (str.startsWith('-')) {
+    parts = str
+      .substring(1)
+      .split('-')
+      .map((x) => parseInt(x));
+    parts[0] *= -1;
+  } else {
+    parts = str.split('-').map((x) => parseInt(x));
+  }
+  console.log(parts);
+  return new Date(...parts);
+};
+
 const propToEpoch = (p) => {
   // p is a fraction between 0 and 1
   const yearsBack = Math.exp(20.3444 * Math.pow(p, 3) + 3) - Math.exp(3);

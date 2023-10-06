@@ -34,12 +34,14 @@ for month in range(1, 13):
             all_events.extend(parse_events(events, month, day))
 
 
-def get_year(date):
+def split_date(date):
     if date[0] == "-":
-        return -int(date[1:].split("-")[0])
-    return int(date.split("-")[0])
+        split = list(map(int, date[1:].split("-")))
+        split[0] *= -1
+        return split
+    return list(map(int, date.split("-")))
 
 
-all_events.sort(key=lambda event: get_year(event["date"]), reverse=True)
+all_events.sort(key=lambda event: split_date(event["date"]), reverse=True)
 with open("./all_events.json", "w") as fout:
     json.dump(all_events, fout, indent=2)

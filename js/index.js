@@ -9,6 +9,8 @@ window.pageOpened = new Date();
 document.addEventListener('alpine:init', () => {
   console.log('Alpine initialized.');
 
+  eventsInit();
+
   const defaultTime = 60 * 10;
   Alpine.store('time', {
     time: Alpine.$persist(defaultTime).as('time'),
@@ -60,10 +62,6 @@ document.addEventListener('alpine:init', () => {
       timer.start(newTime);
     }
   });
-
-  const toggleTimer = () => {
-    // Function to catch start time, if applicable
-  };
 
   const timer = new Timer({
     tick: 1 / 60,
