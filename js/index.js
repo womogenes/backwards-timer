@@ -5,6 +5,9 @@ const main = () => {
 // Record when the page was opened.
 window.pageOpened = new Date();
 
+// Shortcut for document.querySelector
+const $ = document.querySelector.bind(document);
+
 // Global stores!
 document.addEventListener('alpine:init', () => {
   console.log('Alpine initialized.');

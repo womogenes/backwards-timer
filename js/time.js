@@ -82,6 +82,11 @@ const epochToStrShort = (epoch) => {
     const year = new Date(epoch).getFullYear();
     return year < 1000 ? `${year} CE` : year;
   }
+  console.log(yearsBack, new Date().getFullYear());
+  if (yearsBack > new Date().getFullYear()) {
+    const year = new Date(epoch).getFullYear();
+    return `${year} BCE`;
+  }
 
   // Function to round an integer to 3 sig figs
   const toSigFigs = (x, n) => parseFloat(x.toPrecision(n));
