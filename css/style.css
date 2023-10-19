@@ -690,11 +690,6 @@ input[type='number']::-webkit-inner-spin-button,
   height: 100%;
 }
 
-.max-h-fit {
-  max-height: -moz-fit-content;
-  max-height: fit-content;
-}
-
 .max-h-96 {
   max-height: 24rem;
 }
@@ -744,20 +739,16 @@ input[type='number']::-webkit-inner-spin-button,
   gap: 0.5rem;
 }
 
-.gap-6 {
-  gap: 1.5rem;
-}
-
 .gap-4 {
   gap: 1rem;
 }
 
-.overflow-clip {
-  overflow: clip;
+.gap-6 {
+  gap: 1.5rem;
 }
 
-.overflow-scroll {
-  overflow: scroll;
+.overflow-clip {
+  overflow: clip;
 }
 
 .overflow-y-auto {
@@ -772,16 +763,8 @@ input[type='number']::-webkit-inner-spin-button,
   overflow-x: clip;
 }
 
-.overflow-y-scroll {
-  overflow-y: scroll;
-}
-
 .whitespace-nowrap {
   white-space: nowrap;
-}
-
-.whitespace-pre {
-  white-space: pre;
 }
 
 .border {
@@ -807,12 +790,12 @@ input[type='number']::-webkit-inner-spin-button,
   background-color: rgb(229 229 229 / var(--tw-bg-opacity));
 }
 
-.p-6 {
-  padding: 1.5rem;
-}
-
 .p-2 {
   padding: 0.5rem;
+}
+
+.p-6 {
+  padding: 1.5rem;
 }
 
 .px-6 {
@@ -830,10 +813,6 @@ input[type='number']::-webkit-inner-spin-button,
 
 .text-center {
   text-align: center;
-}
-
-.align-top {
-  vertical-align: top;
 }
 
 .text-4xl {
