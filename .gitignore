@@ -6,3 +6,6 @@ data/**.json
 data/**.zip
 
 **.env
+
+# Build artifacts
+css/style.css

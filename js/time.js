@@ -69,6 +69,7 @@ const epochToStr = (epoch) => {
 
 const epochToStrShort = (epoch) => {
   let yearsBack = (new Date() - epoch) / msInYear;
+  let curYear = new Date().getFullYear();
 
   if (yearsBack < 1) {
     if (yearsBack < 0.001) return 'Now';
@@ -77,15 +78,15 @@ const epochToStrShort = (epoch) => {
       month: 'short',
     }).format(new Date(epoch));
   }
-  if (yearsBack < new Date().getFullYear() - 1) {
+  if (yearsBack < curYear - 1) {
     // Between 1 AD and the present
     const year = new Date(epoch).getFullYear();
     return year < 1000 ? `${year} CE` : year;
   }
-  console.log(yearsBack, new Date().getFullYear());
-  if (yearsBack > new Date().getFullYear()) {
-    const year = new Date(epoch).getFullYear();
-    return `${year} BCE`;
+  console.log(yearsBack, curYear);
+  if ((yearsBack > new Date().getFullYear()) & (yearsBack < 1e4)) {
+    const yearBCE = 1 - new Date(epoch).getFullYear();
+    return `${yearBCE} BCE`;
   }
 
   // Function to round an integer to 3 sig figs
