@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html class="h-full" lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -65,59 +65,14 @@
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
   </head>
 
-  <body class="flex items-center overflow-x-hidden p-6">
-    <main class="flex w-full flex-col items-center">
-      <!-- A little progress bar -->
-      <div class="w-full max-w-5xl">
-        <div class="flex w-full justify-center px-6 pb-8 pt-6">
-          <div class="relative w-full" x-data>
-            <div>
-              <!-- Percentage labels -->
-              <template x-for="i in [...Array(11).keys()]">
-                <div
-                  class="absolute sm:!block"
-                  :style="{left: `${i * 10}%`, display: i % 2 ? 'none' : 'block'}"
-                >
-                  <span
-                    class="absolute bottom-1 -translate-x-1/2 text-center text-xs sm:text-base"
-                    x-text="`${i * 10}%`"
-                  ></span>
-                  <span
-                    class="absolute top-4 -translate-x-1/2 text-center text-xs sm:text-xs"
-                    x-html="`${epochToStrShort(propToEpoch(i / 10))}`"
-                  ></span>
-                </div>
-              </template>
-            </div>
-
-            <!-- Actual progress bar bit -->
-            <div class="h-3 w-full overflow-clip bg-neutral-200">
-              <!-- Grid lines -->
-              <div>
-                <template x-for="i in [...Array(11).keys()]">
-                  <div
-                    class="absolute z-10 block h-full border border-dashed border-neutral-900"
-                    :style="{left: `${i * 10}%`}"
-                  ></div>
-                </template>
-              </div>
-
-              <div
-                class="relative h-full bg-blue-500"
-                :style="{ transform: `translateX(-${100 - $store.time.proportion * 100}%)` }"
-                x-cloak
-              ></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
+  <body class="flex h-full items-center overflow-x-hidden p-6">
+    <main class="flex h-full w-full flex-col items-center gap-10">
       <!-- Big date label -->
-      <div class="my-20 w-full max-w-2xl">
+      <div class="w-full max-w-5xl p-6 sm:my-20">
         <p>It is currently</p>
         <p
           x-data
-          class="text-4xl font-bold tabular-nums"
+          class="text-6xl font-bold tabular-nums"
           x-text="$store.time.date"
         ></p>
       </div>
@@ -175,6 +130,51 @@
                 <span x-text="event.text"></span>
               </div>
             </template>
+          </div>
+        </div>
+      </div>
+
+      <!-- A little progress bar -->
+      <div class="mt-auto w-full max-w-5xl">
+        <div class="flex w-full justify-center px-8 pb-10 pt-6">
+          <div class="relative w-full" x-data>
+            <div>
+              <!-- Percentage labels -->
+              <template x-for="i in [...Array(11).keys()]">
+                <div
+                  class="absolute sm:!block"
+                  :style="{left: `${i * 10}%`, display: i % 2 ? 'none' : 'block'}"
+                >
+                  <span
+                    class="absolute bottom-1 -translate-x-1/2 text-center text-xs sm:text-base"
+                    x-text="`${i * 10}%`"
+                  ></span>
+                  <span
+                    class="absolute top-4 -translate-x-1/2 text-center text-xs sm:text-xs"
+                    x-html="`${epochToStrShort(propToEpoch(i / 10))}`"
+                  ></span>
+                </div>
+              </template>
+            </div>
+
+            <!-- Actual progress bar bit -->
+            <div class="h-3 w-full overflow-clip bg-neutral-200">
+              <!-- Grid lines -->
+              <div>
+                <template x-for="i in [...Array(11).keys()]">
+                  <div
+                    class="absolute z-10 block h-full border border-dashed border-neutral-900"
+                    :style="{left: `${i * 10}%`}"
+                  ></div>
+                </template>
+              </div>
+
+              <div
+                class="relative h-full bg-blue-500"
+                :style="{ transform: `translateX(-${100 - $store.time.proportion * 100}%)` }"
+                x-cloak
+              ></div>
+            </div>
           </div>
         </div>
       </div>

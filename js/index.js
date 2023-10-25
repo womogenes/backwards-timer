@@ -1,7 +1,3 @@
-const main = () => {
-  console.log('Hello');
-};
-
 // Record when the page was opened.
 window.pageOpened = new Date();
 
@@ -12,6 +8,7 @@ const $ = document.querySelector.bind(document);
 document.addEventListener('alpine:init', () => {
   console.log('Alpine initialized.');
 
+  // Load in eents from events.js
   eventsInit();
 
   const defaultTime = 60 * 10;
@@ -82,6 +79,7 @@ document.addEventListener('alpine:init', () => {
   });
   timer.start(timeStore.time).pause();
 
+  // Button bindings
   window.setTimer = () => {
     const amount = Alpine.store('timerInput');
     if (!amount) return;
